@@ -24,7 +24,32 @@ function updateGame(i, j) {
     else msgEl.textContent = "Tie!";
   }
 }
-
+function AIPlay(Game) {
+  GameEl.innerHtml = "";
+  let listEl = document.querySelector("ul");
+  listEl.remove();
+  listEl = document.createElement("ul");
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      const cellEl = document.createElement("li");
+      if (Game[i][j] != "_") {
+        cellEl.innerHTML = Game[i][j];
+      } else {
+        addHoverStyle(cellEl);
+      }
+      listEl.appendChild(cellEl);
+    }
+  }
+  GameEl.appendChild(listEl);
+  setTimeout(() => {
+    const x = bestMove(Game);
+    if (x) updateGame(x.i, x.j);
+    announce(Game);
+    const listEl = document.querySelector("ul");
+    listEl.remove();
+    drawGame(Game);
+  }, 500);
+}
 function drawGame(game) {
   GameEl.innerHtml = "";
   const listEl = document.createElement("ul");
@@ -35,18 +60,23 @@ function drawGame(game) {
         cellEl.innerHTML = game[i][j];
       } else {
         addHoverStyle(cellEl);
-        cellEl.addEventListener("click", () => {
-          GameEl.removeChild(listEl);
-          updateGame(i, j);
-          announce(Game);
-          drawGame(Game);
-        });
+        cellEl.addEventListener("click", click(i, j));
       }
       listEl.appendChild(cellEl);
     }
   }
   GameEl.appendChild(listEl);
 }
+const click = (i, j) => {
+  return (e) => {
+    const listEl = document.querySelector("ul");
+    listEl.remove();
+    updateGame(i, j);
+    announce(Game);
+    drawGame(Game);
+    AIPlay(Game);
+  };
+};
 function announce(Game) {
   if (checkGame(Game) === null) {
   } else {

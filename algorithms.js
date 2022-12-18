@@ -48,16 +48,60 @@ function checkGame(game) {
 }
 function bestMove(game) {
   let bestScore = -Infinity;
-  let emptyCells = [];
+  let bestMove;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (game[i][j] === "_") {
-        emptyCells.push({ i, j });
+        game[i][j] = "O";
+        let score = minimax(game, 0, false);
+        game[i][j] = "_";
+        if (score > bestScore) {
+          bestScore = score;
+          bestMove = { i, j };
+        }
       }
     }
   }
-  return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+  return bestMove;
 }
-function minimax(score, depth, turn) {
-  return score;
+function minimax(game, depth, t) {
+  let result = checkGame(game);
+  if (result === "X") {
+    return -1;
+  } else if (result === "O") {
+    return 1;
+  } else if (result === "tie") {
+    return 0;
+  }
+  if (t) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (game[i][j] === "_") {
+          game[i][j] = "O";
+          let score = minimax(game, depth + 1, false);
+          game[i][j] = "_";
+          if (score > bestScore) {
+            bestScore = score;
+          }
+        }
+      }
+    }
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (game[i][j] === "_") {
+          game[i][j] = "X";
+          let score = minimax(game, depth + 1, true);
+          game[i][j] = "_";
+          if (score < bestScore) {
+            bestScore = score;
+          }
+        }
+      }
+    }
+    return bestScore;
+  }
 }
