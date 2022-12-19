@@ -177,6 +177,9 @@ function resetGame() {
   ];
   let listEl = document.querySelector("ul");
   listEl.remove();
+  console.log(turn);
+  turn = "X";
+  console.log(turn);
   drawGame(Game);
   msgEl.innerHTML = "<h1>Game Still On</h1>";
 }
