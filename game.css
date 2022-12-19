@@ -3,9 +3,54 @@ body {
   height: 100%;
   background-color: #4965a2;
 }
-img {
-  margin-left: 10%;
-  margin-bottom: 50px;
+.img {
+  position: fixed;
+  top:21.3%;
+  left: 42.7%;
+  display: none;
+  transition: transform 2000ms, opacity 2500ms;
+}
+.anas {
+  display: block;
+  animation: scaller 2s forwards;
+}
+@keyframes scaller {
+  0% { 
+    transform: scale(1);
+    opacity: 100%;
+  }
+  100% { 
+    transform: scale(2);
+    opacity: 0%;
+  }
+}
+.container {
+  width: 1370px;
+  height: 550px;
+  margin-left: 80px;
+  overflow: hidden;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-image: url(Screenshot_20221219_122114.png);
+  transition: 0.8s;
+}
+
+.hovered{
+  animation: mover 0.8s forwards;
+}
+.fade {
+  animation: fade 0.8 forwards;
+}
+@keyframes mover {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(484px); }
+}
+@keyframes fade {
+  100% { opacity: 0; }
+  0% { opacity: 1; }
 }
 .wrap {
   height: 100%;
