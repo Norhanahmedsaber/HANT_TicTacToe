@@ -67,9 +67,9 @@ function bestMove(game) {
 function minimax(game, depth, t) {
   let result = checkGame(game);
   if (result === "X") {
-    return -1;
+    return -10;
   } else if (result === "O") {
-    return 1;
+    return 10;
   } else if (result === "tie") {
     return 0;
   }
@@ -87,7 +87,7 @@ function minimax(game, depth, t) {
         }
       }
     }
-    return bestScore;
+    return bestScore - depth;
   } else {
     let bestScore = Infinity;
     for (let i = 0; i < 3; i++) {
@@ -102,6 +102,6 @@ function minimax(game, depth, t) {
         }
       }
     }
-    return bestScore;
+    return bestScore + depth  ;
   }
 }
