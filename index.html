@@ -22,14 +22,7 @@
             const imgEl = document.querySelector(".image");
             const imgEl2 = document.querySelector(".img");
             const buttonEl = document.getElementById("btn").addEventListener("click", () => {
-              imgEl.classList.add("hovered");
-              setTimeout(()=> {
-                imgEl2.classList.add("anas");
-              }, 800);
-              let tID = setTimeout(function () {
-                  window.location.href = "/game.html";
-                  window.clearTimeout(tID);
-              }, 2000);
+              window.location.href = "/game.html";
             });
       </script>
   </body>
